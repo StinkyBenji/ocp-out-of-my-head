@@ -1,0 +1,21 @@
+kind: Kustomization
+apiVersion: kustomize.config.k8s.io/v1beta1
+
+
+generatorOptions:
+  annotations:
+    argocd.argoproj.io/compare-options: IgnoreExtraneous
+    argocd.argoproj.io/sync-options: Prune=false
+  disableNameSuffixHash: true
+
+resources:
+- ../github
+- gitlab-secret-sealed.yaml
+
+patches:
+- path: patch-gitlab-oauth.yaml
+  target:
+    group: config.openshift.io
+    kind: OAuth
+    name: cluster
+    version: v1

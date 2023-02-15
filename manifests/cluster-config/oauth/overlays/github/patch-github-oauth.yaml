@@ -1,0 +1,12 @@
+- op: add
+  path: /spec/identityProviders/-
+  value:
+    name: githubidp
+    mappingMethod: claim
+    type: GitHub
+    github:
+      clientID: e820b18494299354e497
+      clientSecret:
+        name: github-oauth-client-secret
+    
+      
