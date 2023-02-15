@@ -10,7 +10,7 @@ spec:
     server: https://kubernetes.default.svc
   project: default
   source:
-    path: manifests/cluster-config/groups-roles-bindings/base
+    path: manifests/cluster-config/groups-roles-bindings/overlays
     repoURL: https://github.com/StinkyBenji/ocp-out-of-my-head.git
     targetRevision: main
   syncPolicy:

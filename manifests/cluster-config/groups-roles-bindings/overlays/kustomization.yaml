@@ -1,0 +1,15 @@
+kind: Kustomization
+apiVersion: kustomize.config.k8s.io/v1beta1
+
+
+resources:
+  - ../base
+
+patches:
+  - target:
+      group: user.openshift.io
+      version: v1
+      kind: Group
+      name: cluster-admins
+    path: patch-cluster-admins-users.yaml
+      
