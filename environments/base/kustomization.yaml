@@ -9,3 +9,4 @@ resources:
 - ../../manifests/apps/cert-manager/base
 - ../../manifests/apps/openshift-pipelines/base
 - ../../manifests/apps/cert-manager-webhook-hetzner/base
+- ../../manifests/apps/certificates/base
