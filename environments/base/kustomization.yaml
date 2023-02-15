@@ -8,3 +8,4 @@ resources:
 - ../../manifests/apps/oauth
 - ../../manifests/apps/cert-manager/base
 - ../../manifests/apps/openshift-pipelines/base
+- ../../manifests/apps/cert-manager-webhook-hetzner/base
