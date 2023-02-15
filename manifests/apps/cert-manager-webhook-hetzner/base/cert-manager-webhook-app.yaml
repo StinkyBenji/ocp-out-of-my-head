@@ -7,20 +7,23 @@ metadata:
 spec:
   project: default
   source:
-    path: deploy/cert-manager-webhook-hetzner
-    repoURL: https://github.com/vadimkim/cert-manager-webhook-hetzner
-    targetRevision: master
+    chart: cert-manager-webhook-hetzner
+    repoURL: https://vadimkim.github.io/cert-manager-webhook-hetzner
+    targetRevision: 1.2.1
     helm:
       values: |
         groupName: ocp4.whatever.out-of-my-head.de
         certManager:
-          namespace: cert-manager-webhook
+          namespace: openshift-cert-manager
+          serviceAccountName: cert-manager
+        secretName:
+          - hetzner-api-token
+        podSecurityContext:
+          runAsGroup: 
+          runAsUser: 
+
   destination:
     server: "https://kubernetes.default.svc"
-    namespace: cert-manager-webhook
+    namespace: openshift-cert-manager
   syncPolicy:
-    automated:
-      prune: false
-      selfHeal: false
-    syncOptions:
-      - CreateNamespace=true
+    automated: {}
