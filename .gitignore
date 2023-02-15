@@ -1,3 +1,5 @@
 alert*/
 certificates/
 oauth/
+manifests/cluster-config/groups-roles-bindings/
+scripts/

@@ -1,0 +1,15 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: openshift-pipelines
+  annotations:
+    argocd.argoproj.io/sync-wave: "2"
+spec:
+  destination:
+    namespace: openshift-operators
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    path: manifests/cluster-config/openshift-pipelines-operator/overlays/latest
+    repoURL: https://github.com/StinkyBenji/ocp-out-of-my-head.git
+    targetRevision: main
