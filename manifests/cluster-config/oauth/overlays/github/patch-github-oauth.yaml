@@ -9,7 +9,8 @@
       clientSecret:
         name: github-oauth-client-secret
       teams: []
-      organizations: ocp-idp
+      organizations: 
+        - ocp-idp
 
     
       
