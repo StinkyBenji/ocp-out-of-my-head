@@ -13,3 +13,5 @@ spec:
     path: manifests/cluster-config/groups-roles-bindings/base
     repoURL: https://github.com/StinkyBenji/ocp-out-of-my-head.git
     targetRevision: main
+  syncPolicy:
+    automated: {}
