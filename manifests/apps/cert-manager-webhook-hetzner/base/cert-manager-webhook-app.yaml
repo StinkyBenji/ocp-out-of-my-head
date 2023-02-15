@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: cert-manager-webhook-app
+  name: cert-manager-webhook-hetzner
   annotations:
     argocd.argoproj.io/sync-wave: "3"
 spec:
@@ -13,10 +13,14 @@ spec:
     helm:
       values: |
         groupName: ocp4.whatever.out-of-my-head.de
+        certManager:
+          namespace: cert-manager-webhook
   destination:
     server: "https://kubernetes.default.svc"
-    namespace: openshift-cert-manager
+    namespace: cert-manager-webhook
   syncPolicy:
     automated:
       prune: false
       selfHeal: false
+    syncOptions:
+      - CreateNamespace=true
