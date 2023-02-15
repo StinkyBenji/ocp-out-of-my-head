@@ -13,3 +13,5 @@ spec:
     path: manifests/cluster-config/openshift-pipelines-operator/overlays/latest
     repoURL: https://github.com/StinkyBenji/ocp-out-of-my-head.git
     targetRevision: main
+  syncPolicy:
+    automated: {}
