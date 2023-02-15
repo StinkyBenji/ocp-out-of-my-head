@@ -4,5 +4,6 @@ kind: Kustomization
 
 resources:
 - ../../manifests/apps/sealed-secrets/base
+- ../../manifests/apps/oauth
 - ../../manifests/apps/cert-manager/base
 - ../../manifests/apps/openshift-pipelines/base
