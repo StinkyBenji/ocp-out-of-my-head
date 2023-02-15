@@ -11,12 +11,9 @@ roleRef:
   kind: ClusterRole
   name: cluster-admin
 subjects:
-  - apiGroup: rbac.authorization.k8s.io
-    kind: User
-    name: admin
-  - apiGroup: rbac.authorization.k8s.io
-    kind: User
-    name: StinkyBenji
+  - kind: Group
+    apiGroup: rbac.authorization.k8s.io
+    name: cluster-admins
   - kind: ServiceAccount
     name: openshift-gitops-argocd-application-controller
     namespace: openshift-gitops
