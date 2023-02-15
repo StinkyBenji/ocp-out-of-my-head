@@ -10,6 +10,7 @@ generatorOptions:
 
 resources:
 - ../../base
+- htpasswd-secret-sealed.yaml
 
 patches:
 - path: patch-htpasswd-auth.yaml
