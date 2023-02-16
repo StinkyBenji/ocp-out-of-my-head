@@ -10,3 +10,5 @@ resources:
 - ../../manifests/apps/openshift-pipelines/base
 - ../../manifests/apps/cert-manager-webhook-hetzner/base
 - ../../manifests/apps/certificates/base
+- ../../manifests/apps/alertmanager/base
+
