@@ -25,4 +25,6 @@ spec:
     server: "https://kubernetes.default.svc"
     namespace: openshift-cert-manager
   syncPolicy:
-    automated: {}
+    automated: 
+      prune: false
+      selfHeal: true
