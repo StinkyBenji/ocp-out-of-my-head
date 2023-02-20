@@ -1,3 +1,3 @@
 *-secret.yaml
-htpasswd/filedata/htpasswd
+manifests/cluster-config/oauth/overlays/htpasswd/filedata/
 quay*
