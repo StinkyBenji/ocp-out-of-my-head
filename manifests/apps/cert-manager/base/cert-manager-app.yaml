@@ -14,5 +14,7 @@ spec:
     repoURL: https://github.com/StinkyBenji/ocp-out-of-my-head.git
     targetRevision: main
   syncPolicy:
-    automated: {}
+    automated: 
+      prune: false
+      selfHeal: true
       
