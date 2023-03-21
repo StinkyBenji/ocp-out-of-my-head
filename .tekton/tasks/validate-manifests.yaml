@@ -37,4 +37,3 @@ spec:
           fi
         done
         echo "Finish validating manifests"
-
