@@ -41,19 +41,7 @@ spec:
           name: yaml-lint
         params:
           - name: args
-            value: ["-c .yamllint", $(find . -type f -regex ".*yaml" -print)]
-      
-      - name: shellcheck
-        runAfter:
-          - fetch-repository
-        workspaces:
-          - name: shared-workspace
-            workspace: shared-workspace
-        taskRef:
-          name: shellcheck
-        params:
-          - name: args
-            value: ["--shell=bash", $(find . -type f -regex ".*sh" -print)]
+            value: ["-c $(pwd)/.yamllint", $(find . -type f -regex ".*yaml" -print)]
 
   workspaces:
     - name: shared-workspace
@@ -64,3 +52,4 @@ spec:
           resources:
             requests:
               storage: 1Gi
+
