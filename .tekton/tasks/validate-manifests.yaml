@@ -1,0 +1,40 @@
+---
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: validate-manifests
+  labels:
+    app.kubernetes.io/version: "0.1"
+  annotations:
+    tekton.dev/pipelines.minVersion: "0.12.1"
+    tekton.dev/displayName: "kustomize validate manifests"
+spec:
+  description: >-
+    It validates the kustomization resources
+  workspaces:
+    - name: shared-workspace
+  steps:
+    - name: validate-manifests
+      image: registry.k8s.io/kustomize/kustomize:v5.0.1
+      workingDir: $(workspaces.shared-workspace.path)
+      script: |
+        set -x
+        kustomize version 
+
+        for dir in $(find . -name "kustomization.yaml" -exec dirname {} \;)
+        do 
+          echo
+          echo "Validate $dir"
+          echo
+
+          KUSTOMIZE_BUILD_OUTPUT=$(kustomize build "$dir")
+
+          build_response=$?
+
+          if [ $build_response -ne 0 ]; then
+            echo "Error building $dir"
+            exit 1
+          fi
+        done
+        echo "Finish validating manifests"
+

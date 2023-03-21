@@ -8,6 +8,7 @@ metadata:
     pipelinesascode.tekton.dev/on-target-branch: "[main]"
     pipelinesascode.tekton.dev/max-keep-runs: "2"
     pipelinesascode.tekton.dev/task: "[git-clone]"
+    pipelinesascode.tekton.dev/task-1: "[.tekton/tasks/validate-manifests.yaml]"
 spec:
   params:
     - name: repo_url
@@ -54,17 +55,10 @@ spec:
         workspaces:
           - name: shared-workspace
             workspace: shared-workspace
-        taskSpec:
-          workspaces:
-            - name: shared-workspace
-          steps:
-            - name: validate-manifests
-              image: registry.k8s.io/kustomize/kustomize:v5.0.1
-              workingDir: $(workspaces.shared-workspace.path)
-              script: |
-                set -x
-                kustomize version
-                
+        taskRef:
+          name: validate-manifests
+
+
   workspaces:
     - name: shared-workspace
       volumeClaimTemplate:
