@@ -1,14 +1,12 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
-
 resources:
-- ../../manifests/apps/groups-and-membership/base
-- ../../manifests/apps/sealed-secrets/base
-- ../../manifests/apps/oauth
-- ../../manifests/apps/cert-manager/base
-- ../../manifests/apps/openshift-pipelines/base
-- ../../manifests/apps/cert-manager-webhook-hetzner/base
-- ../../manifests/apps/certificates/base
-- ../../manifests/apps/alertmanager/base
-
+  - ../../manifests/apps/groups-and-membership/base
+  - ../../manifests/apps/sealed-secrets/base
+  - ../../manifests/apps/oauth
+  - ../../manifests/apps/cert-manager/base
+  - ../../manifests/apps/openshift-pipelines/base
+  - ../../manifests/apps/cert-manager-webhook-hetzner/base
+  - ../../manifests/apps/certificates/base
+  - ../../manifests/apps/alertmanager/base

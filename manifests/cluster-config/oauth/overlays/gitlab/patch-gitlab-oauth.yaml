@@ -9,4 +9,3 @@
       clientSecret:
         name: gitlab-oauth-client-secret
       url: 'https://gitlab.consulting.redhat.com'
-      

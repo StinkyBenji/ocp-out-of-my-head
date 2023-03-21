@@ -1,0 +1,67 @@
+---
+apiVersion: tekton.dev/v1beta1
+kind: PipelineRun
+metadata:
+  name: linters
+  annotations:
+    pipelinesascode.tekton.dev/on-event: "[push, pull_request]"
+    pipelinesascode.tekton.dev/on-target-branch: "[main]"
+    pipelinesascode.tekton.dev/max-keep-runs: "2"
+    pipelinesascode.tekton.dev/task: "[git-clone, shellcheck, yaml-lint]"
+spec:
+  params:
+    - name: repo_url
+      value: "{{repo_url}}"
+    - name: revision
+      value: "{{revision}}"
+  serviceAccountName: pipeline
+  pipelineSpec:
+    params:
+      - name: repo_url
+      - name: revision
+    tasks:
+      - name: fetch-repository
+        params:
+        - name: url
+          value: "$(params.repo_url)"
+        - name: revision
+          value: "$(params.revision)"
+        taskRef:
+          name: git-clone
+        workspaces:
+          - name: output
+            workspace: shared-workspace
+
+      - name: yamllint
+        runAfter:
+          - fetch-repository
+        workspaces:
+          - name: shared-workspace
+            workspace: shared-workspace
+        taskRef:
+          name: yaml-lint
+        params:
+          - name: args
+            value: ["-c .yamllint", $(find . -type f -regex ".*yaml" -print)]
+      
+      - name: shellcheck
+        runAfter:
+          - fetch-repository
+        workspaces:
+          - name: shared-workspace
+            workspace: shared-workspace
+        taskRef:
+          name: shellcheck
+        params:
+          - name: args
+            value: ["--shell=bash", $(find . -type f -regex ".*sh" -print)]
+
+  workspaces:
+    - name: shared-workspace
+      volumeClaimTemplate:
+        spec:
+          accessModes:
+            - ReadWriteOnce
+          resources:
+            requests:
+              storage: 1Gi
