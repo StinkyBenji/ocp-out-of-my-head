@@ -48,6 +48,23 @@ spec:
                 set -x
                 yamllint -c .yamllint $(find . -type f -regex ".*y[a]ml" -print)
 
+      - name: shellcheck
+        runAfter:
+          - fetch-repository
+        workspaces:
+          - name: shared-workspace
+            workspace: shared-workspace
+        taskSpec:
+          workspaces:
+            - name: shared-workspace
+          steps:
+            - name: shellcheck
+              image: docker.io/koalaman/shellcheck:v0.7.1
+              workingDir: $(workspaces.shared-workspace.path)
+              script: |
+                set -x
+                shellcheck --shell=bash $(find . -type f -regex ".*sh" -print)
+
   workspaces:
     - name: shared-workspace
       volumeClaimTemplate:
