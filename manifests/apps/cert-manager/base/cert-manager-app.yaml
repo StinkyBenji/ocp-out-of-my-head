@@ -13,5 +13,3 @@ spec:
     path: manifests/cluster-config/cert-manager-operator/operator/base
     repoURL: https://github.com/StinkyBenji/ocp-out-of-my-head.git
     targetRevision: main
-
-      
