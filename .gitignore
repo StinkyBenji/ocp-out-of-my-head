@@ -2,3 +2,4 @@
 manifests/cluster-config/oauth/overlays/htpasswd/filedata/
 quay*
 key.txt
+
