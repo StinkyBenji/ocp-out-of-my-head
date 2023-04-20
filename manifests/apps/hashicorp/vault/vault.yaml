@@ -12,6 +12,22 @@ spec:
     targetRevision: 0.24.1
     helm:
       releaseName: vault
+      values: |
+        global:
+          openshift: true
+        dev:
+          enabled: true
+        injector:
+          image:
+            repository: "registry.connect.redhat.com/hashicorp/vault-k8s"
+            tag: "1.2.1-ubi"
+        agentImage:
+          repository: "registry.connect.redhat.com/hashicorp/vault"
+          tag: "1.13.1-ubi"
+        server:
+          image:
+            repository: "registry.connect.redhat.com/hashicorp/vault"
+            tag: "1.13.1-ubi"
   destination:
     server: "https://kubernetes.default.svc"
     namespace: hashicorp-vault
