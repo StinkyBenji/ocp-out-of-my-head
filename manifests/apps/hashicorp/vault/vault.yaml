@@ -17,6 +17,8 @@ spec:
           openshift: true
         dev:
           enabled: true
+        ui:
+          enabled: true
         injector:
           image:
             repository: "registry.connect.redhat.com/hashicorp/vault-k8s"
@@ -25,6 +27,8 @@ spec:
           repository: "registry.connect.redhat.com/hashicorp/vault"
           tag: "1.13.1-ubi"
         server:
+          route: 
+            enabled: true
           image:
             repository: "registry.connect.redhat.com/hashicorp/vault"
             tag: "1.13.1-ubi"
