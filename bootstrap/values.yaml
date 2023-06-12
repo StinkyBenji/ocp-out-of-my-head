@@ -1,0 +1,53 @@
+default:
+  app:
+    isHelm: false
+    enableAutoSync: true
+    enabled: true
+    destination: openshift-gitops
+    server: https://kubernetes.default.svc
+    project: default
+    source:
+      repoURL: git@github.com:StinkyBenji/ocp-out-of-my-head.git
+      targetRevision: main
+
+applications:
+  openshift-pipelines:
+    source:
+      path: components/apps/openshift-pipelines-operator/overlays/latest
+
+  cert-manager-operator:
+    source:
+      path: components/apps/cert-manager-operator/base
+
+  custom-console:
+    source: 
+      path: components/configs/console-route/base
+
+  cert-manager-webhook-hetzner:
+    isHelm: true
+    chart: cert-manager-webhook-hetzner
+    repoURL: https://vadimkim.github.io/cert-manager-webhook-hetzner
+    targetRevision: 1.2.2
+    extraSourceFields: |
+      helm:
+        values: |
+          groupName: ocp4.whatever.out-of-my-head.de
+          certManager:
+            namespace: cert-manager
+            serviceAccountName: cert-manager
+          secretName:
+            - hetzner-api-token
+          podSecurityContext:
+            runAsGroup: 
+            runAsUser: 
+  
+  oauth:
+    # TBD
+
+  ntp-config:
+    # TBD
+
+
+  certificates:
+    # TBD
+  

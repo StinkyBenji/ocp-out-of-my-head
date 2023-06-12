@@ -1,7 +1,0 @@
-kind: Kustomization
-apiVersion: kustomize.config.k8s.io/v1beta1
-
-resources:
-  - argocdadmins-group.yaml
-  - cluster-admin-users-rb.yaml
-  - cluster-admins-group-base.yaml

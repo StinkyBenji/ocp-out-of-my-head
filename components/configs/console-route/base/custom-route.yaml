@@ -1,0 +1,11 @@
+apiVersion: config.openshift.io/v1
+kind: Ingress
+metadata:
+  name: cluster
+  annotations:
+    argocd.argoproj.io/sync-options: ServerSideApply=true
+spec:
+  componentRoutes:
+    - name: console
+      namespace: openshift-console
+      hostname: console.apps.ocp4.whatever.out-of-my-head.de
