@@ -26,9 +26,10 @@ applications:
 
   cert-manager-webhook-hetzner:
     isHelm: true
-    chart: cert-manager-webhook-hetzner
-    repoURL: https://vadimkim.github.io/cert-manager-webhook-hetzner
-    targetRevision: 1.2.2
+    source:
+      chart: cert-manager-webhook-hetzner
+      repoURL: https://vadimkim.github.io/cert-manager-webhook-hetzner
+      targetRevision: 1.2.2
     extraSourceFields: |
       helm:
         values: |
