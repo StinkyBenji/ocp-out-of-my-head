@@ -3,4 +3,4 @@ kind: Kustomization
 
 resources:
   - letsencrypt-issuer.yaml
-  - hetzner-secret-sealed.yaml
+  - hetzner-api-token.yaml

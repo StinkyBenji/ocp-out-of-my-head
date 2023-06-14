@@ -41,13 +41,18 @@ applications:
             runAsGroup: 
             runAsUser: 
   
-  oauth:
-    # TBD
+  letsencrypt:
+    source:
+      path: components/configs/letsencrypt/base
 
   ntp-config:
-    # TBD
+    source: 
+      path: components/configs/ntp-config
 
+  oauth:
+    source:
+      path: components/configs/oauth/overlays/gitlab
 
   certificates:
-    # TBD
-  
+    source:
+      path: components/configs/certificates/base

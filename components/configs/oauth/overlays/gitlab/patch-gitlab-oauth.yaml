@@ -7,5 +7,5 @@
     gitlab:
       clientID: c82b206b231d81b3b85c1942779aa19a7d6e8101832fd6be3a71d2466d7dee21
       clientSecret:
-        name: gitlab-oauth-client-secret
+        name: gitlab-client-secret
       url: 'https://gitlab.consulting.redhat.com'

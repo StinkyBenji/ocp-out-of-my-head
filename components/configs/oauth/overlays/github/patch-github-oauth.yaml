@@ -7,7 +7,7 @@
     github:
       clientID: e820b18494299354e497
       clientSecret:
-        name: github-oauth-client-secret
+        name: github-client-secret
       teams: []
       organizations: 
         - ocp-idp

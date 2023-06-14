@@ -4,12 +4,11 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 generatorOptions:
   annotations:
     argocd.argoproj.io/compare-options: IgnoreExtraneous
-    argocd.argoproj.io/sync-options: Prune=false
-  disableNameSuffixHash: true
+    argocd.argoproj.io/sync-options: ServerSideApply=true 
 
 resources:
   - ../htpasswd
-  - github-secret-sealed.yaml
+  - github-client-es.yaml
 
 patches:
   - path: patch-github-oauth.yaml
