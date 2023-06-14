@@ -3,8 +3,9 @@ default:
     isHelm: false
     enableAutoSync: true
     enabled: true
-    destination: openshift-gitops
-    server: https://kubernetes.default.svc
+    destination:
+      namespace: openshift-gitops
+      server: https://kubernetes.default.svc
     project: default
     source:
       repoURL: git@github.com:StinkyBenji/ocp-out-of-my-head.git
