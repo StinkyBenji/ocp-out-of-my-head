@@ -38,14 +38,11 @@ applications:
       helm:
         values: |
           groupName: ocp4.whatever.out-of-my-head.de
-          certManager:
-            namespace: cert-manager
-            serviceAccountName: cert-manager
           secretName:
             - hetzner-api-token
           podSecurityContext:
-            runAsGroup: 
-            runAsUser: 
+            runAsGroup: null
+            runAsUser: null
   
   letsencrypt:
     annotations:
