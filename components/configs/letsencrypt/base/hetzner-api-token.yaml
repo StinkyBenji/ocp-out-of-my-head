@@ -2,7 +2,7 @@ apiVersion: external-secrets.io/v1beta1
 kind: ExternalSecret
 metadata:
   name: hetzner-api-token
-  namespace: cert-manager
+  namespace: cert-manager-operator
 spec:
   secretStoreRef: 
     name: vault-backend

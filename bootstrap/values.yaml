@@ -17,6 +17,8 @@ applications:
       path: components/apps/openshift-pipelines-operator/overlays/latest
 
   cert-manager-operator:
+    annotations:
+      argocd.argoproj.io/sync-wave: "1"
     source:
       path: components/apps/cert-manager-operator/base
 
@@ -30,6 +32,8 @@ applications:
       chart: cert-manager-webhook-hetzner
       repoURL: https://vadimkim.github.io/cert-manager-webhook-hetzner
       targetRevision: 1.2.2
+    annotations:
+      argocd.argoproj.io/sync-wave: "2"
     extraSourceFields: |
       helm:
         values: |
@@ -44,17 +48,17 @@ applications:
             runAsUser: 
   
   letsencrypt:
+    annotations:
+      argocd.argoproj.io/sync-wave: "3"
     source:
       path: components/configs/letsencrypt/base
-
-  ntp-config:
-    source: 
-      path: components/configs/ntp-config
 
   oauth:
     source:
       path: components/configs/oauth/overlays/gitlab
 
   certificates:
+    annotations:
+      argocd.argoproj.io/sync-wave: "4"
     source:
       path: components/configs/certificates/base
