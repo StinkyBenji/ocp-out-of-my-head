@@ -41,9 +41,14 @@ applications:
           secretName:
             - hetzner-api-token
           podSecurityContext:
-            runAsGroup: null
-            runAsUser: null
-  
+            runAsGroup: 
+            runAsUser: 
+          securityContext:
+            runAsUser:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop: ["ALL"] 
+              
   letsencrypt:
     annotations:
       argocd.argoproj.io/sync-wave: "3"
