@@ -28,27 +28,27 @@ applications:
 
   cert-manager-webhook-hetzner:
     isHelm: true
+    annotations:
+      argocd.argoproj.io/sync-wave: "2"
     source:
       chart: cert-manager-webhook-hetzner
       repoURL: https://vadimkim.github.io/cert-manager-webhook-hetzner
       targetRevision: 1.2.2
-    annotations:
-      argocd.argoproj.io/sync-wave: "2"
-    extraSourceFields: |
-      helm:
-        values: |
-          groupName: ocp4.whatever.out-of-my-head.de
-          secretName:
-            - hetzner-api-token
-          podSecurityContext:
-            runAsGroup: 
-            runAsUser: 
-          securityContext:
-            runAsUser:
-            allowPrivilegeEscalation: false
-            capabilities:
-              drop: ["ALL"] 
-              
+      extraSourceFields: |
+        helm:
+          values: |
+            groupName: ocp4.whatever.out-of-my-head.de
+            secretName:
+              - hetzner-api-token
+            podSecurityContext:
+              runAsGroup: 
+              runAsUser: 
+            securityContext:
+              runAsUser:
+              allowPrivilegeEscalation: false
+              capabilities:
+                drop: ["ALL"] 
+    
   letsencrypt:
     annotations:
       argocd.argoproj.io/sync-wave: "3"
