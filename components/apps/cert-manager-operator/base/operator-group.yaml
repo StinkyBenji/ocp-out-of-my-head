@@ -3,4 +3,10 @@ kind: OperatorGroup
 metadata:
   name: cert-manager-operator
   namespace: cert-manager-operator
-spec: {}
+spec: 
+  targetNamespaces:
+    - cert-manager-operator
+    - openshift-config
+    - openshift-ingress-operator
+    - openshift-ingress
+    - cert-manager
