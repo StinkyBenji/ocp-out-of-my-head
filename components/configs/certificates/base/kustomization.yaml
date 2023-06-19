@@ -8,5 +8,5 @@ generatorOptions:
 resources:
   - openshift-wildcard-certificate.yaml
   - openshift-api-certificate.yaml
-  - apiserver.yaml
-  - ingress.yaml
+  # - apiserver.yaml
+  # - ingress.yaml

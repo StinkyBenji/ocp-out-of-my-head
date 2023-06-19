@@ -38,6 +38,9 @@ applications:
         helm:
           values: |
             groupName: ocp4.whatever.out-of-my-head.de
+            certManager:
+              namespace: openshift-cert-manager
+              serviceAccountName: cert-manager
             secretName:
               - hetzner-api-token
             podSecurityContext:
