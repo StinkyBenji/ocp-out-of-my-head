@@ -30,7 +30,7 @@ applications:
     annotations:
       argocd.argoproj.io/sync-wave: "2"
     source:
-      path: deploy/cert-manager-webhook-hetzne
+      path: deploy/cert-manager-webhook-hetzner
       repoURL: git@github.com:StinkyBenji/cert-manager-webhook-hetzner.git
       targetRevision: main
       extraSourceFields: |
