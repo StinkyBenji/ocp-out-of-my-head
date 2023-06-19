@@ -29,6 +29,8 @@ applications:
   cert-manager-webhook-hetzner:
     annotations:
       argocd.argoproj.io/sync-wave: "2"
+    destination:
+      namespace: openshift-cert-manager
     source:
       path: deploy/cert-manager-webhook-hetzner
       repoURL: git@github.com:StinkyBenji/cert-manager-webhook-hetzner.git
@@ -50,6 +52,7 @@ applications:
               allowPrivilegeEscalation: false
               capabilities:
                 drop: ["ALL"] 
+          
     
   letsencrypt:
     annotations:
