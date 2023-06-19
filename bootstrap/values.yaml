@@ -27,13 +27,12 @@ applications:
       path: components/configs/console-route/base
 
   cert-manager-webhook-hetzner:
-    isHelm: true
     annotations:
       argocd.argoproj.io/sync-wave: "2"
     source:
-      chart: cert-manager-webhook-hetzner
-      repoURL: https://vadimkim.github.io/cert-manager-webhook-hetzner
-      targetRevision: 1.2.2
+      path: deploy/cert-manager-webhook-hetzne
+      repoURL: git@github.com:StinkyBenji/cert-manager-webhook-hetzner.git
+      targetRevision: main
       extraSourceFields: |
         helm:
           values: |
