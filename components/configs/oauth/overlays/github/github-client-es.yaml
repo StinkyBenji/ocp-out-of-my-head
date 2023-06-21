@@ -1,18 +1,16 @@
 apiVersion: external-secrets.io/v1beta1
 kind: ExternalSecret
 metadata:
-  name: github-client-secret 
-  namespace: openshift-config 
+  name: github-client-secret
+  namespace: openshift-config
 spec:
-  secretStoreRef: 
+  secretStoreRef:
     name: vault-backend
     kind: ClusterSecretStore
   target:
     name: github-client-secret
   data:
-    - secretKey: clientSecret 
+    - secretKey: clientSecret
       remoteRef:
         key: github-oauth
         property: clientSecret
- 
-

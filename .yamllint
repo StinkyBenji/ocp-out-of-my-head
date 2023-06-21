@@ -1,10 +1,25 @@
 ---
 extends: default
 
+yaml-files:
+  - '*.yml'
+  - '*.yaml'
+  - '.yamllint'
+
 rules:
+  indentation:
+    level: warning
+    indent-sequences: consistent
+  empty-lines:
+    level: warning
+  comments-indentation: false
   line-length:
     max: 80
     level: warning
-  
   trailing-spaces:
     level: warning
+  truthy:
+    allowed-values: ['true', 'false']
+  braces:
+    level: warning
+    max-spaces-inside: 1

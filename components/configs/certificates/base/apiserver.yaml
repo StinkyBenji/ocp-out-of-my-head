@@ -8,6 +8,6 @@ spec:
   servingCerts:
     namedCertificates:
     - names:
-      - api.ocp4.whatever.out-of-my-head.de 
+        - api.ocp4.whatever.out-of-my-head.de
       servingCertificate:
         name: openshift-api-certificate
