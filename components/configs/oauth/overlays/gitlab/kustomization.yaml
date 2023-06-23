@@ -1,11 +1,6 @@
 kind: Kustomization
 apiVersion: kustomize.config.k8s.io/v1beta1
 
-generatorOptions:
-  annotations:
-    argocd.argoproj.io/compare-options: IgnoreExtraneous
-    argocd.argoproj.io/sync-options: ServerSideApply=true
-
 resources:
   - ../github
   - gitlab-client-es.yaml

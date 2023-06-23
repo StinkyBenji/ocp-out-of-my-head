@@ -3,6 +3,7 @@ default:
     isHelm: false
     enableAutoSync: true
     enabled: true
+    autoSyncPrune: false
     destination:
       namespace: openshift-gitops
       server: https://kubernetes.default.svc
@@ -23,7 +24,7 @@ applications:
       path: components/apps/cert-manager-operator/base
 
   custom-console:
-    source: 
+    source:
       path: components/configs/console-route/base
 
   cert-manager-webhook-hetzner:
@@ -45,15 +46,15 @@ applications:
             secretName:
               - hetzner-api-token
             podSecurityContext:
-              runAsGroup: 
-              runAsUser: 
+              runAsGroup:
+              runAsUser:
             securityContext:
               runAsUser:
               allowPrivilegeEscalation: false
               capabilities:
-                drop: ["ALL"] 
-          
-    
+                drop: ["ALL"]
+
+
   letsencrypt:
     annotations:
       argocd.argoproj.io/sync-wave: "3"
