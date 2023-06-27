@@ -1,10 +1,8 @@
 ---
 extends: default
 
-yaml-files:
-  - '*.yml'
-  - '*.yaml'
-  - '.yamllint'
+ignore:
+  - components/configs/ntp-config
 
 rules:
   indentation:

@@ -1,0 +1,23 @@
+{{- range $role := .Values.roles -}}
+---
+apiVersion: machineconfiguration.openshift.io/v1
+kind: MachineConfig
+metadata:
+  name: 50-{{ $role }}-{{ include "ntp-config.fullname" $ }}
+  annotations:
+    argocd.argoproj.io/sync-options: ServerSideApply=true
+  labels:
+    {{- include "ntp-config.labels" $ | nindent 4 }}
+    machineconfiguration.openshift.io/role: {{ $role }}
+spec:
+  config:
+    ignition:
+      version: 3.2.0
+    storage:
+      files:
+        - path: /etc/chrony.conf
+          mode: 0644
+          overwrite: true
+          contents:
+            source: data:text/plain;charset=utf-8;base64,{{ tpl $.Values.chronyConfig $ | b64enc }}
+{{ end }}
