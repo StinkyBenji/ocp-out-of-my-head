@@ -12,5 +12,5 @@ spec:
   data:
     - secretKey: clientSecret
       remoteRef:
-        key: github-oauth
+        key: github-client-secret
         property: clientSecret
