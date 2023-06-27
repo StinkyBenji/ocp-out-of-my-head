@@ -48,7 +48,7 @@ applications:
     annotations:
       argocd.argoproj.io/sync-wave: "2"
     destination:
-      namespace: openshift-cert-manager
+      namespace: cert-manager
     project: cluster-config
     source:
       path: deploy/cert-manager-webhook-hetzner
@@ -57,7 +57,7 @@ applications:
         values: |
           groupName: ocp4.whatever.out-of-my-head.de
           certManager:
-            namespace: openshift-cert-manager
+            namespace: cert-manager
             serviceAccountName: cert-manager
           secretName:
             - hetzner-api-token
