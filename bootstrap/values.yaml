@@ -3,8 +3,8 @@ default:
     enableAutoSync: true
     enabled: true
     autoSyncPrune: false
-		annotations:
-			argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true,ServerSideApply=true
+    annotations:
+      argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true,ServerSideApply=true
     destination:
       namespace: openshift-gitops
       server: https://kubernetes.default.svc
@@ -12,45 +12,44 @@ default:
       repoURL: git@github.com:StinkyBenji/ocp-out-of-my-head.git
 
 projects:
-	cluster-config:
-		description: Project for basic  cluster configuration
-		namespace: openshift-gitops
-		sourceRepos:
-			- git@github.com:StinkyBenji/ocp-out-of-my-head.git
-			- git@github.com:StinkyBenji/some-helm-charts.git
-			- git@github.com:StinkyBenji/cert-manager-webhook-hetzner.git
-		destinations: |
-			- namespace: '*'
-				server: https://kubernetes.default.svc
-		extraFields: |
-			clusterResourceWhitelist:
-			- group: '*'
-				kind: '*'
+  - name: cluster-config
+    description: Project for basic cluster configuration
+    namespace: openshift-gitops
+    sourceRepos:
+      - git@github.com:StinkyBenji/ocp-out-of-my-head.git
+      - git@github.com:StinkyBenji/some-helm-charts.git
+      - git@github.com:StinkyBenji/cert-manager-webhook-hetzner.git
+    destinations:
+      - namespace: '*'
+        server: https://kubernetes.default.svc
+    clusterResourceWhitelist:
+      - group: '*'
+        kind: '*'
 
 applications:
-  openshift-pipelines:
-		project: cluster-config
+  - name: openshift-pipelines
+    project: cluster-config
     source:
       path: components/apps/openshift-pipelines-operator/overlays/latest
 
-  cert-manager-operator:
+  - name: cert-manager-operator
     annotations:
       argocd.argoproj.io/sync-wave: "1"
-		project: cluster-config
+    project: cluster-config
     source:
       path: components/apps/cert-manager-operator/base
 
-  custom-console:
-		project: cluster-config
+  - name: custom-console
+    project: cluster-config
     source:
       path: components/configs/console-route/base
 
-  cert-manager-webhook-hetzner:
+  - name: cert-manager-webhook-hetzner
     annotations:
       argocd.argoproj.io/sync-wave: "2"
     destination:
       namespace: openshift-cert-manager
-		project: cluster-config
+    project: cluster-config
     source:
       path: deploy/cert-manager-webhook-hetzner
       repoURL: git@github.com:StinkyBenji/cert-manager-webhook-hetzner.git
@@ -71,26 +70,26 @@ applications:
             capabilities:
               drop: ["ALL"]
 
-  letsencrypt:
+  - name: letsencrypt
     annotations:
       argocd.argoproj.io/sync-wave: "3"
-		project: cluster-config
+    project: cluster-config
     source:
       path: components/configs/letsencrypt/base
 
-  oauth:
-		project: cluster-config
+  - name: oauth
+    project: cluster-config
     source:
       path: components/configs/oauth/overlays/gitlab
 
-  ntp-config:
-		project: cluster-config
+  - name: ntp-config
+    project: cluster-config
     source:
       path: components/configs/ntp-config
 
-  certificates:
+  - name: certificates
     annotations:
       argocd.argoproj.io/sync-wave: "4"
-		project: cluster-config
+    project: cluster-config
     source:
       path: components/configs/certificates/base
