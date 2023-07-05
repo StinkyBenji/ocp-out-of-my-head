@@ -1,0 +1,35 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: demo
+  namespace: openshift-gitops
+spec:
+  generators:
+    - git:
+        repoURL: git@github.com:StinkyBenji/ocp-out-of-my-head.git
+        revision: tenants
+        directories:
+        - path: tenants/*/*
+  template:
+    metadata:
+      name: demo-'{{ path.basename }}'
+    spec:
+      project: demo
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+      sources:
+        - repoURL: git@github.com:StinkyBenji/some-helm-charts.git
+          targetRevision: main
+          path: charts/namespace-provision
+          helm:
+            valueFiles:
+              - $ns-val/'{{ path.basename }}'-ns.yaml
+        - repoURL: git@github.com:StinkyBenji/ocp-out-of-my-head.git
+          targetRevision: tenants
+          path: '{{ path }}'
+          ref: ns-val
+      destination:
+        namespace: openshift-gitops
+        server: https://api.ocp4.whatever.out-of-my-head.de:6443
