@@ -1,0 +1,13 @@
+ocp_namespace:
+  name: test-ns
+  description: "A namespace for testing"
+  annotations:
+    app: demo
+  labels:
+    owner: StinkyBenji
+  rbac:
+    - role: admin
+      kind: user
+      name: StinkyBenji
+  networkPolicy:
+    enabled: true

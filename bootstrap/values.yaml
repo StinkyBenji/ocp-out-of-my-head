@@ -26,6 +26,19 @@ projects:
       - group: '*'
         kind: '*'
 
+  - name: demo
+    description: Project for basic cluster configuration
+    namespace: openshift-gitops
+    sourceRepos:
+      - git@github.com:StinkyBenji/ocp-out-of-my-head.git
+      - git@github.com:StinkyBenji/some-helm-charts.git
+    destinations:
+      - namespace: '*'
+        server: https://kubernetes.default.svc
+    clusterResourceWhitelist:
+      - group: '*'
+        kind: '*'
+
 applications:
   - name: openshift-pipelines
     project: cluster-config
