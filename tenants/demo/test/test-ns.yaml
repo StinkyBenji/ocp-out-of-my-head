@@ -7,7 +7,7 @@ ocp_namespace:
     owner: StinkyBenji
   rbac:
     - role: admin
-      kind: user
+      kind: User
       name: StinkyBenji
   networkPolicy:
     enabled: true
