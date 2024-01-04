@@ -40,6 +40,19 @@ applications:
     destination:
       namespace: openshift-operators
       server: https://kubernetes.default.svc
+    extraSpec:
+      ignoreDifferences:
+        - group: "operator.tekton.dev"
+          kind: "TektonConfig"
+          jsonPointers:
+          - /spec/
+    syncOptions:
+      - RespectIgnoreDifferences=true
+
+  - name: groups-and-rbac
+    project: cluster-config
+    source:
+      path: components/configs/groups-and-rbac/base
 
   - name: cert-manager-operator
     annotations:
@@ -109,7 +122,7 @@ applications:
     source:
       path: components/configs/certificates/base
 
-  - name: spiffe-spire
+  - name: spire
     annotations:
       argocd.argoproj.io/sync-wave: "5"
     project: cluster-config
