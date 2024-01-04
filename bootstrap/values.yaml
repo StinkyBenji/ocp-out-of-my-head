@@ -36,6 +36,9 @@ applications:
     project: cluster-config
     source:
       path: components/configs/tekton-config
+    destination:
+      namespace: openshift-operators
+      server: https://kubernetes.default.svc
 
   - name: cert-manager-operator
     annotations:
@@ -119,12 +122,17 @@ applications:
         duration: 5s
         factor: 2
         maxDuration: 10m
+    syncOptions:
+    - CreateNamespace=true
     source:
       repoURL: https://github.com/spiffe/helm-charts-hardened
       path: charts/spire
       helm:
         valueFiles:
           -  components/apps/spiffe-spire/values.yaml
+    destination:
+      namespace: spire-server
+      server: https://kubernetes.default.svc
 
   - name: spire-crd
     project: cluster-config
@@ -143,3 +151,6 @@ applications:
     source:
       repoURL: https://github.com/spiffe/helm-charts-hardened
       path: charts/spire-crds
+    destination:
+      namespace: spire-server
+      server: https://kubernetes.default.svc
