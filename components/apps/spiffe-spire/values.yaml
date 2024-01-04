@@ -1,0 +1,47 @@
+global:
+  openshift: true
+  installAndUpgradeHooks:
+    enabled: false
+  deleteHooks:
+    enabled: false
+  spire:
+    recommendations:
+      enabled: true
+    clusterName: whatever
+    trustDomain: apps.ocp4.whatever.out-of-my-head.de
+    namespaces:
+      system:
+        create: true
+
+spire-server:
+  tornjak:
+    enabled: true
+    ingress:
+      enabled: true
+  ca_subject:
+    country: DE
+    organization: Red Hat
+    common_name: apps.ocp4.whatever.out-of-my-head.de
+
+tornjak-frontend:
+  enabled: true
+  ingress:
+    enabled: true
+  service:
+    type: ClusterIP
+    port: 3000
+  resources:
+    requests:
+      cpu: 50m
+      memory: 128Mi
+    limits:
+      cpu: 100m
+      memory: 512Mi
+
+spiffe-oidc-discovery-provider:
+  enabled: true
+  ingress:
+    enabled: true
+  tls:
+    spire:
+      enabled: false
