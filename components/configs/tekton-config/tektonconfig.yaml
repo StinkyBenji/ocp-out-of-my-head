@@ -16,7 +16,7 @@ spec:
     signers.x509.fulcio.issuer: https://oidc-discovery.apps.ocp4.whatever.out-of-my-head.de
     signers.x509.fulcio.provider: spiffe
     signers.x509.tuf.mirror.url: https://tuf.apps.ocp4.whatever.out-of-my-head.de
-    transparency.enabled: true
+    transparency.enabled: "true"
     transparency.url: https://rekor.apps.ocp4.whatever.out-of-my-head.de
     options:
       disabled: false
