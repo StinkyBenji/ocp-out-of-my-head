@@ -32,6 +32,11 @@ applications:
     source:
       path: components/apps/openshift-pipelines-operator/overlays/latest
 
+  - name: tektonconfig
+    project: cluster-config
+    source:
+      path: components/configs/tekton-config
+
   - name: cert-manager-operator
     annotations:
       argocd.argoproj.io/sync-wave: "1"
