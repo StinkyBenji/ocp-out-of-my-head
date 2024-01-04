@@ -125,12 +125,14 @@ applications:
         maxDuration: 10m
     syncOptions:
     - CreateNamespace=true
-    source:
-      repoURL: https://github.com/spiffe/helm-charts-hardened
+    multiSources:
+    - repoURL: https://github.com/spiffe/helm-charts-hardened
       path: charts/spire
       helm:
         valueFiles:
-          -  components/apps/spiffe-spire/values.yaml
+          -  $val/components/apps/spiffe-spire/values.yaml
+    - repoURL: git@github.com:StinkyBenji/ocp-out-of-my-head.git
+      ref: val
     destination:
       namespace: spire-server
       server: https://kubernetes.default.svc
