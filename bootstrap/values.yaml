@@ -99,3 +99,42 @@ applications:
     autoSyncPrune: false
     source:
       path: components/configs/certificates/base
+
+  - name: spiffe-spire
+    annotations:
+      argocd.argoproj.io/sync-wave: "5"
+    project: cluster-config
+    namespace: openshift-gitops
+    extraMetadata:
+      finalizers:
+        - resources-finalizer.argocd.argoproj.io
+    syncRetry:
+      limit: -1
+      backoff:
+        duration: 5s
+        factor: 2
+        maxDuration: 10m
+    source:
+      repoURL: https://github.com/spiffe/helm-charts-hardened
+      path: charts/spire
+      helm:
+        valueFiles:
+          -  components/apps/spiffe-spire/values.yaml
+
+  - name: spire-crd
+    project: cluster-config
+    annotations:
+      argocd.argoproj.io/sync-wave: "6"
+    extraMetadata:
+      finalizers:
+        - resources-finalizer.argocd.argoproj.io
+    namespace: openshift-gitops
+    syncRetry:
+      limit: -1
+      backoff:
+        duration: 5s
+        factor: 2
+        maxDuration: 10m
+    source:
+      repoURL: https://github.com/spiffe/helm-charts-hardened
+      path: charts/spire-crds
