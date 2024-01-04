@@ -19,6 +19,7 @@ projects:
       - git@github.com:StinkyBenji/ocp-out-of-my-head.git
       - git@github.com:StinkyBenji/some-helm-charts.git
       - git@github.com:StinkyBenji/cert-manager-webhook-hetzner.git
+      - https://github.com/spiffe/helm-charts-hardened
     destinations:
       - namespace: '*'
         server: https://kubernetes.default.svc
