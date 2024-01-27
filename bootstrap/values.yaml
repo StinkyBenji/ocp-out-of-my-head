@@ -19,6 +19,19 @@ projects:
       - git@github.com:StinkyBenji/ocp-out-of-my-head.git
       - git@github.com:StinkyBenji/some-helm-charts.git
       - git@github.com:StinkyBenji/cert-manager-webhook-hetzner.git
+    destinations:
+      - namespace: '*'
+        server: https://kubernetes.default.svc
+    clusterResourceWhitelist:
+      - group: '*'
+        kind: '*'
+
+  - name: cluster-app
+    description: Project for applications running in the cluster
+    namespace: openshift-gitops
+    sourceRepos:
+      - git@github.com:StinkyBenji/ocp-out-of-my-head.git
+      - git@github.com:StinkyBenji/some-helm-charts.git
       - https://github.com/spiffe/helm-charts-hardened
     destinations:
       - namespace: '*'
@@ -40,14 +53,6 @@ applications:
     destination:
       namespace: openshift-operators
       server: https://kubernetes.default.svc
-    extraSpec:
-      ignoreDifferences:
-        - group: "operator.tekton.dev"
-          kind: "TektonConfig"
-          jsonPointers:
-          - /spec/
-    syncOptions:
-      - RespectIgnoreDifferences=true
 
   - name: groups-and-rbac
     project: cluster-config
@@ -125,7 +130,7 @@ applications:
   - name: spire
     annotations:
       argocd.argoproj.io/sync-wave: "5"
-    project: cluster-config
+    project: cluster-app
     namespace: openshift-gitops
     extraMetadata:
       finalizers:
@@ -151,7 +156,7 @@ applications:
       server: https://kubernetes.default.svc
 
   - name: spire-crd
-    project: cluster-config
+    project: cluster-app
     annotations:
       argocd.argoproj.io/sync-wave: "6"
     extraMetadata:
@@ -169,4 +174,64 @@ applications:
       path: charts/spire-crds
     destination:
       namespace: spire-server
+      server: https://kubernetes.default.svc
+
+  - name: dex
+    project: cluster-app
+    annotations:
+      argocd.argoproj.io/sync-wave: "6"
+    extraMetadata:
+      finalizers:
+        - resources-finalizer.argocd.argoproj.io
+    namespace: openshift-gitops
+    multiSources:
+    - repoURL: git@github.com:StinkyBenji/some-helm-charts.git
+      path: charts/dex-server
+      helm:
+        valueFiles:
+          -  $val/components/apps/argo-workflows/values-dex.yaml
+    - repoURL: git@github.com:StinkyBenji/ocp-out-of-my-head.git
+      ref: val
+    syncOptions:
+    - CreateNamespace=true
+    destination:
+      namespace: argo-workflows
+      server: https://kubernetes.default.svc
+
+  - name: argo-workflows
+    project: cluster-app
+    annotations:
+      argocd.argoproj.io/sync-wave: "7"
+    extraMetadata:
+      finalizers:
+        - resources-finalizer.argocd.argoproj.io
+    namespace: openshift-gitops
+    multiSources:
+    - repoURL: git@github.com:StinkyBenji/some-helm-charts.git
+      path: charts/custom-argo-workflows
+      helm:
+        valueFiles:
+          -  $val/components/apps/argo-workflows/values.yaml
+    - repoURL: git@github.com:StinkyBenji/ocp-out-of-my-head.git
+      ref: val
+    destination:
+      namespace: argo-workflows
+      server: https://kubernetes.default.svc
+
+  - name: demo-namespace
+    project: cluster-app
+    extraMetadata:
+      finalizers:
+        - resources-finalizer.argocd.argoproj.io
+    namespace: openshift-gitops
+    multiSources:
+    - repoURL: git@github.com:StinkyBenji/some-helm-charts.git
+      path: charts/namespace-provision
+      helm:
+        valueFiles:
+          -  $val/components/apps/demos/values-argo-wf-demo.yaml
+    - repoURL: git@github.com:StinkyBenji/ocp-out-of-my-head.git
+      ref: val
+    destination:
+      namespace: openshift-gitops
       server: https://kubernetes.default.svc
