@@ -229,7 +229,7 @@ applications:
       path: charts/namespace-provision
       helm:
         valueFiles:
-          -  $val/components/apps/demos/values-argo-wf-demo.yaml
+          -  $val/components/apps/demos/values-argo-wf-demo-ns.yaml
     - repoURL: git@github.com:StinkyBenji/ocp-out-of-my-head.git
       ref: val
     destination:
