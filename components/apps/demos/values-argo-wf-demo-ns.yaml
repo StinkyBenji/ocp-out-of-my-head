@@ -1,5 +1,5 @@
 ocp_namespace:
-  name: argo-wf-demop
+  name: argo-wf-demo
   description: "demo namespace for argo workflows"
   annotations:
     content: playground
