@@ -230,7 +230,6 @@ applications:
       helm:
         valueFiles:
           - $val/components/apps/demos/values-argo-wf-demo-ns.yaml
-          - $val/components/apps/demos/values-pipelines-demo-ns.yaml
     - repoURL: git@github.com:StinkyBenji/ocp-out-of-my-head.git
       ref: val
     destination:
