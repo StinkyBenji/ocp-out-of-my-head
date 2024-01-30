@@ -127,54 +127,54 @@ applications:
     source:
       path: components/configs/certificates/base
 
-  - name: spire
-    annotations:
-      argocd.argoproj.io/sync-wave: "5"
-    project: cluster-app
-    namespace: openshift-gitops
-    extraMetadata:
-      finalizers:
-        - resources-finalizer.argocd.argoproj.io
-    syncRetry:
-      limit: -1
-      backoff:
-        duration: 5s
-        factor: 2
-        maxDuration: 10m
-    syncOptions:
-    - CreateNamespace=true
-    multiSources:
-    - repoURL: https://github.com/spiffe/helm-charts-hardened
-      path: charts/spire
-      helm:
-        valueFiles:
-          -  $val/components/apps/spiffe-spire/values.yaml
-    - repoURL: git@github.com:StinkyBenji/ocp-out-of-my-head.git
-      ref: val
-    destination:
-      namespace: spire-server
-      server: https://kubernetes.default.svc
+  # - name: spire
+  #   annotations:
+  #     argocd.argoproj.io/sync-wave: "5"
+  #   project: cluster-app
+  #   namespace: openshift-gitops
+  #   extraMetadata:
+  #     finalizers:
+  #       - resources-finalizer.argocd.argoproj.io
+  #   syncRetry:
+  #     limit: -1
+  #     backoff:
+  #       duration: 5s
+  #       factor: 2
+  #       maxDuration: 10m
+  #   syncOptions:
+  #   - CreateNamespace=true
+  #   multiSources:
+  #   - repoURL: https://github.com/spiffe/helm-charts-hardened
+  #     path: charts/spire
+  #     helm:
+  #       valueFiles:
+  #         -  $val/components/apps/spiffe-spire/values.yaml
+  #   - repoURL: git@github.com:StinkyBenji/ocp-out-of-my-head.git
+  #     ref: val
+  #   destination:
+  #     namespace: spire-server
+  #     server: https://kubernetes.default.svc
 
-  - name: spire-crd
-    project: cluster-app
-    annotations:
-      argocd.argoproj.io/sync-wave: "6"
-    extraMetadata:
-      finalizers:
-        - resources-finalizer.argocd.argoproj.io
-    namespace: openshift-gitops
-    syncRetry:
-      limit: -1
-      backoff:
-        duration: 5s
-        factor: 2
-        maxDuration: 10m
-    source:
-      repoURL: https://github.com/spiffe/helm-charts-hardened
-      path: charts/spire-crds
-    destination:
-      namespace: spire-server
-      server: https://kubernetes.default.svc
+  # - name: spire-crd
+  #   project: cluster-app
+  #   annotations:
+  #     argocd.argoproj.io/sync-wave: "6"
+  #   extraMetadata:
+  #     finalizers:
+  #       - resources-finalizer.argocd.argoproj.io
+  #   namespace: openshift-gitops
+  #   syncRetry:
+  #     limit: -1
+  #     backoff:
+  #       duration: 5s
+  #       factor: 2
+  #       maxDuration: 10m
+  #   source:
+  #     repoURL: https://github.com/spiffe/helm-charts-hardened
+  #     path: charts/spire-crds
+  #   destination:
+  #     namespace: spire-server
+  #     server: https://kubernetes.default.svc
 
   - name: dex
     project: cluster-app
@@ -229,7 +229,8 @@ applications:
       path: charts/namespace-provision
       helm:
         valueFiles:
-          -  $val/components/apps/demos/values-argo-wf-demo-ns.yaml
+          - $val/components/apps/demos/values-argo-wf-demo-ns.yaml
+          - $val/components/apps/demos/values-pipelines-demo-ns.yaml
     - repoURL: git@github.com:StinkyBenji/ocp-out-of-my-head.git
       ref: val
     destination:
