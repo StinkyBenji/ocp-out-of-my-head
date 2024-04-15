@@ -142,6 +142,7 @@ applications:
         duration: 5s
         factor: 2
         maxDuration: 10m
+    enableAutoSync: false
     syncOptions:
     - CreateNamespace=true
     multiSources:
