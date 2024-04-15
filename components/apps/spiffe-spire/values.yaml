@@ -1,27 +1,30 @@
 global:
+  k8s:
+    clusterDomain: whatever.out-of-my-head.de
   openshift: true
   installAndUpgradeHooks:
     enabled: false
   deleteHooks:
     enabled: false
   spire:
-    recommendations:
-      enabled: true
     clusterName: whatever
     trustDomain: apps.ocp4.whatever.out-of-my-head.de
     namespaces:
       system:
         create: true
+  persistence:
+    storageClass: managed-nfs-storage
+  ca_subject:
+    country: DE
+    organization: Red Hat
+    common_name: apps.ocp4.whatever.out-of-my-head.de
 
 spire-server:
   tornjak:
     enabled: true
     ingress:
       enabled: true
-  ca_subject:
-    country: DE
-    organization: Red Hat
-    common_name: apps.ocp4.whatever.out-of-my-head.de
+
 
 tornjak-frontend:
   enabled: true
