@@ -20,3 +20,7 @@ Configuration:
 - Certificates
 - NTP configuration
 - OAuth config
+
+Note:
+To configure spiffe as OIDC issuer for RHTAS (specifically for Fulcio), currently
+needs to set `ClientID` to be Sigstore
