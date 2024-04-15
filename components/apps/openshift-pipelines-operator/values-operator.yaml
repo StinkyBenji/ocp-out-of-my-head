@@ -1,0 +1,4 @@
+operator:
+  name: openshift-pipelines-operator-rh
+  namespace: openshift-operators
+  channel: latest

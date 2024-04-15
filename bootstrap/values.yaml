@@ -41,10 +41,16 @@ projects:
         kind: '*'
 
 applications:
-  - name: openshift-pipelines
+  - name: openshift-pipelines-operator
     project: cluster-config
-    source:
-      path: components/apps/openshift-pipelines-operator/overlays/latest
+    multiSources:
+    - repoURL: git@github.com:StinkyBenji/some-helm-charts.git
+      path: charts/operator-installation
+      helm:
+        valueFiles:
+          -  $val/components/apps/openshift-pipelines-operator/values-operator.yaml
+    - repoURL: git@github.com:StinkyBenji/ocp-out-of-my-head.git
+      ref: val
 
   # - name: tektonconfig
   #   project: cluster-config
