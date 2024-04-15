@@ -69,14 +69,8 @@ applications:
     annotations:
       argocd.argoproj.io/sync-wave: "1"
     project: cluster-config
-    multiSources:
-    - repoURL: git@github.com:StinkyBenji/some-helm-charts.git
-      path: charts/operator-installation
-      helm:
-        valueFiles:
-          -  $val/components/apps/cert-manager-operator/values-operator.yaml
-    - repoURL: git@github.com:StinkyBenji/ocp-out-of-my-head.git
-      ref: val
+    source:
+      path: components/apps/cert-manager-operator/base
 
   - name: custom-console
     project: cluster-config
