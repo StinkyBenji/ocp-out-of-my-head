@@ -130,6 +130,7 @@ applications:
   - name: spire
     annotations:
       argocd.argoproj.io/sync-wave: "5"
+      argocd.argoproj.io/compare-options: IgnoreExtraneous
     project: cluster-app
     namespace: openshift-gitops
     extraMetadata:
