@@ -1,0 +1,3 @@
+operator:
+  name: rhtas-operator
+  namespace: openshift-operators
