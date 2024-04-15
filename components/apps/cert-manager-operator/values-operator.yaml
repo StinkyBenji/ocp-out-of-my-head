@@ -1,0 +1,5 @@
+operator:
+  name: openshift-cert-manager-operator
+  createNamespace: true
+  namespace: cert-manager-operator
+  channel: stable-v1

@@ -1,7 +1,0 @@
-apiVersion: pipelinesascode.tekton.dev/v1alpha1
-kind: Repository
-metadata:
-  name: cluster-gitops-repo
-  namespace: pipeline-as-code-cluster-config
-spec:
-  url: "https://github.com/StinkyBenji/ocp-out-of-my-head"
