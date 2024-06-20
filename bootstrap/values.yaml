@@ -81,21 +81,9 @@ applications:
       path: deploy/cert-manager-webhook-hetzner
       repoURL: git@github.com:StinkyBenji/cert-manager-webhook-hetzner.git
       helm:
-        values: |
-          groupName: ocp4.whatever.out-of-my-head.de
-          certManager:
-            namespace: cert-manager
-            serviceAccountName: cert-manager
-          secretName:
-            - hetzner-api-token
-          podSecurityContext:
-            runAsGroup:
-            runAsUser:
-          securityContext:
-            runAsUser:
-            allowPrivilegeEscalation: false
-            capabilities:
-              drop: ["ALL"]
+        valueFiles:
+          - components/apps/cert-manager-webhook-hetzner/values.yaml
+
 
   - name: letsencrypt
     annotations:

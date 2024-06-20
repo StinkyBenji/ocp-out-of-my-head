@@ -1,0 +1,14 @@
+groupName: ocp4.whatever.out-of-my-head.de
+certManager:
+  namespace: cert-manager
+  serviceAccountName: cert-manager
+secretName:
+  - hetzner-api-token
+podSecurityContext:
+  runAsGroup:
+  runAsUser:
+securityContext:
+  runAsUser:
+  allowPrivilegeEscalation: false
+  capabilities:
+    drop: ["ALL"]
