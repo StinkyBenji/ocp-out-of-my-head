@@ -32,7 +32,9 @@ projects:
     sourceRepos:
       - git@github.com:StinkyBenji/ocp-out-of-my-head.git
       - git@github.com:StinkyBenji/some-helm-charts.git
+      - git@github.com:StinkyBenji/secure-the-chain.git
       - https://github.com/spiffe/helm-charts-hardened
+      - https://kyverno.github.io/kyverno
     destinations:
       - namespace: '*'
         server: https://kubernetes.default.svc
