@@ -107,13 +107,13 @@ applications:
     source:
       path: components/configs/ntp-config
 
-  - name: certificates
-    annotations:
-      argocd.argoproj.io/sync-wave: "4"
-    project: cluster-config
-    autoSyncPrune: false
-    source:
-      path: components/configs/certificates/base
+  # - name: certificates
+  #   annotations:
+  #     argocd.argoproj.io/sync-wave: "4"
+  #   project: cluster-config
+  #   autoSyncPrune: false
+  #   source:
+  #     path: components/configs/certificates/base
 
   - name: spire
     annotations:
@@ -166,64 +166,4 @@ applications:
       targetRevision: spire-0.20.0
     destination:
       namespace: spire-server
-      server: https://kubernetes.default.svc
-
-  - name: dex
-    project: cluster-app
-    annotations:
-      argocd.argoproj.io/sync-wave: "6"
-    extraMetadata:
-      finalizers:
-        - resources-finalizer.argocd.argoproj.io
-    namespace: openshift-gitops
-    multiSources:
-    - repoURL: git@github.com:StinkyBenji/some-helm-charts.git
-      path: charts/dex-server
-      helm:
-        valueFiles:
-          -  $val/components/apps/argo-workflows/values-dex.yaml
-    - repoURL: git@github.com:StinkyBenji/ocp-out-of-my-head.git
-      ref: val
-    syncOptions:
-    - CreateNamespace=true
-    destination:
-      namespace: argo-workflows
-      server: https://kubernetes.default.svc
-
-  - name: argo-workflows
-    project: cluster-app
-    annotations:
-      argocd.argoproj.io/sync-wave: "7"
-    extraMetadata:
-      finalizers:
-        - resources-finalizer.argocd.argoproj.io
-    namespace: openshift-gitops
-    multiSources:
-    - repoURL: git@github.com:StinkyBenji/some-helm-charts.git
-      path: charts/custom-argo-workflows
-      helm:
-        valueFiles:
-          -  $val/components/apps/argo-workflows/values.yaml
-    - repoURL: git@github.com:StinkyBenji/ocp-out-of-my-head.git
-      ref: val
-    destination:
-      namespace: argo-workflows
-      server: https://kubernetes.default.svc
-
-  - name: demo-namespace
-    project: cluster-app
-    extraMetadata:
-      finalizers:
-        - resources-finalizer.argocd.argoproj.io
-    namespace: openshift-gitops
-    multiSources:
-    - repoURL: git@github.com:StinkyBenji/some-helm-charts.git
-      path: charts/namespace-provision
-      helm:
-        valueFiles:
-          - $val/components/apps/demos/values-argo-wf-demo-ns.yaml
-    - repoURL: git@github.com:StinkyBenji/ocp-out-of-my-head.git
-      ref: val
-    destination:
-      namespace: openshift-gitops
       server: https://kubernetes.default.svc
