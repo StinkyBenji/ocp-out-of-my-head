@@ -77,12 +77,14 @@ applications:
     destination:
       namespace: cert-manager
     project: cluster-config
-    source:
-      path: deploy/cert-manager-webhook-hetzner
+    multiSources:
+    - path: deploy/cert-manager-webhook-hetzner
       repoURL: git@github.com:StinkyBenji/cert-manager-webhook-hetzner.git
       helm:
         valueFiles:
-          - components/apps/cert-manager-webhook-hetzner/values.yaml
+          - $val/components/apps/cert-manager-webhook-hetzner/values.yaml
+    - repoURL: git@github.com:StinkyBenji/ocp-out-of-my-head.git
+      ref: val
 
 
   - name: letsencrypt
@@ -107,13 +109,13 @@ applications:
     source:
       path: components/configs/ntp-config
 
-  # - name: certificates
-  #   annotations:
-  #     argocd.argoproj.io/sync-wave: "4"
-  #   project: cluster-config
-  #   autoSyncPrune: false
-  #   source:
-  #     path: components/configs/certificates/base
+  - name: certificates
+    annotations:
+      argocd.argoproj.io/sync-wave: "4"
+    project: cluster-config
+    autoSyncPrune: false
+    source:
+      path: components/configs/certificates/base
 
   - name: spire
     annotations:
@@ -130,7 +132,7 @@ applications:
         duration: 5s
         factor: 2
         maxDuration: 10m
-    enableAutoSync: false
+    enableAutoSync: true
     syncOptions:
     - CreateNamespace=true
     multiSources:
@@ -160,6 +162,7 @@ applications:
         duration: 5s
         factor: 2
         maxDuration: 10m
+    enableAutoSync: true
     source:
       repoURL: https://github.com/spiffe/helm-charts-hardened
       path: charts/spire-crds
