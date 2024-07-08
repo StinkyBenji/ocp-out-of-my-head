@@ -13,13 +13,13 @@ spec:
     artifacts.pipelinerun.storage: "oci"
     artifacts.taskrun.format: "in-toto"
     artifacts.taskrun.storage: "oci"
-    signers.x509.fulcio.address: https://fulcio-server-openshift-operators.apps.ocp4.whatever.out-of-my-head.de/
+    signers.x509.fulcio.address: https://fulcio-server-trusted-artifact-signer.apps.ocp4.whatever.out-of-my-head.de
     signers.x509.fulcio.enabled: true
     signers.x509.fulcio.issuer: https://oidc-discovery.apps.ocp4.whatever.out-of-my-head.de
     signers.x509.fulcio.provider: spiffe
-    signers.x509.tuf.mirror.url: https://tuf-openshift-operators.apps.ocp4.whatever.out-of-my-head.de/
+    signers.x509.tuf.mirror.url: https://tuf-trusted-artifact-signer.apps.ocp4.whatever.out-of-my-head.de
     transparency.enabled: "true"
-    transparency.url: https://rekor-server-openshift-operators.apps.ocp4.whatever.out-of-my-head.de/
+    transparency.url: https://rekor-server-trusted-artifact-signer.apps.ocp4.whatever.out-of-my-head.de
     options:
       disabled: false
       deployments:
